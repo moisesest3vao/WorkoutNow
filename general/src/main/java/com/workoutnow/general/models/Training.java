@@ -16,13 +16,13 @@ public class Training {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private ExerciseDifficulty exerciseType;
+    private ExerciseDifficulty exerciseDifficulty;
     @ManyToMany
     private List<Exercise> exercises;
 
     public Training(TrainingForm form, List<Exercise> exercises) {
         this.exercises = exercises;
         this.name = form.getName();
-        this.exerciseType = form.getExerciseType();
+        this.exerciseDifficulty = form.getExerciseDifficulty();
     }
 }

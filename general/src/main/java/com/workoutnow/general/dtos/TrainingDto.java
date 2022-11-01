@@ -27,7 +27,7 @@ public class TrainingDto {
     public TrainingDto(Training entity) {
         this.id = entity.getId();
         this.name = entity.getName();
-        this.exerciseType = entity.getExerciseType();
+        this.exerciseType = entity.getExerciseDifficulty();
         this.exercises = entity.getExercises().stream().map(ExerciseDto::new).collect(Collectors.toList());
     }
 }

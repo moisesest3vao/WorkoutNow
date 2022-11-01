@@ -15,7 +15,7 @@ public class TrainingForm {
     @NotBlank
     private String name;
     @NotNull
-    private ExerciseDifficulty exerciseType;
+    private ExerciseDifficulty exerciseDifficulty;
     @NotNull
     private List<Long> exercisesId;
 }
