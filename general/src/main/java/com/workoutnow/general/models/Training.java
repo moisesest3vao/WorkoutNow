@@ -1,22 +1,28 @@
 package com.workoutnow.general.models;
 
+import com.workoutnow.general.dtos.TrainingForm;
 import com.workoutnow.general.enums.ExerciseDifficulty;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class Training {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private ExerciseDifficulty exerciseType;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "training_exercise_mapping",
-            joinColumns = {@JoinColumn(name = "training_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "exercise_id", referencedColumnName = "id")})
-    @MapKey(name = "name")
-    private Map<Long, Exercise> exercises  = new HashMap<Long, Exercise>();
+    @ManyToMany
+    private List<Exercise> exercises;
+
+    public Training(TrainingForm form, List<Exercise> exercises) {
+        this.exercises = exercises;
+        this.name = form.getName();
+        this.exerciseType = form.getExerciseType();
+    }
 }
