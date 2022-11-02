@@ -21,7 +21,7 @@ public class ExecutionDto {
         this.id = execution.getId();
         this.training = execution.getTraining();
         this.status = execution.getStatus();
-        this.start = execution.getStart();
-        this.end = execution.getEnd();
+        this.start = execution.getStartDate();
+        this.end = execution.getEndDate();
     }
 }

@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: msgeneral
+  datasource:
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/workoutnowgeneral
+    platform: postgres
+    password: mysecretpassword
+  jpa:
+    database: POSTGRESQL
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: create-drop
+  database:
+    driverClassName: org.postgresql.Driver
+server:
+  port: 0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:admin@localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+

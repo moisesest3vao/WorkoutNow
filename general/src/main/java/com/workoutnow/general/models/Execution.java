@@ -15,17 +15,18 @@ public class Execution {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
     private Training training;
     private StatusExecution status;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date start;
+    private Date startDate;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date end;
+    private Date endDate;
 
     public Execution(ExecutionForm form, Training training) {
         this.id = form.getId();
         this.training = training;
         this.status = StatusExecution.IN_PROGRESS;
-        this.start = new Date();
+        this.startDate = new Date();
     }
 }
