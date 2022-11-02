@@ -1,9 +1,8 @@
-#SECURITY BASED CONFIGURATIONS
 app:
   config:
     keycloak:
-      url: http://localhost:8081/auth
-      realm: javatodev-internet-banking
+      url: http://localhost:8081
+      realm: workoutnow
 
 spring:
   main:
@@ -19,18 +18,9 @@ spring:
           lower-case-service-id: true
   security:
     oauth2:
-      client:
-        provider:
-          keycloak:
-            token-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/token
-            authorization-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/auth
-            user-name-attribute: preferred_username
-            user-info-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/userinfo
-            jwk-set-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/certs
-            user-info-authentication-method: header
-      resource-server:
+      resourceserver:
         jwt:
-          issuer-uri: http://localhost:8081/realms/pagsysrealm
+          issuer-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}
 
 server:
   port: 8080

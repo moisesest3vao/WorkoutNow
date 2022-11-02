@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @RestController
@@ -24,6 +25,7 @@ public class ExerciseController {
     }
 
     @GetMapping
+    @RolesAllowed({"admin"})
     public ResponseEntity<Page<ExerciseDto>> getAll(@RequestParam Integer size, @RequestParam Integer page){
         Pageable pageable = (Pageable) PageRequest.of(page, size);
         Page<ExerciseDto> exercisesDto = this.exerciseService.getAll(pageable);

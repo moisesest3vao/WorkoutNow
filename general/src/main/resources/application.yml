@@ -1,3 +1,9 @@
+app:
+  config:
+    keycloak:
+      url: http://localhost:8081
+      realm: workoutnow
+
 spring:
   application:
     name: msgeneral
@@ -13,17 +19,19 @@ spring:
       ddl-auto: create-drop
   database:
     driverClassName: org.postgresql.Driver
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}
+
 server:
   port: 0
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-
 eureka:
   client:
+    fetch-registry: true
+    register-with-eureka: true
     service-url:
       defaultZone: http://admin:admin@localhost:8761/eureka
   instance:
