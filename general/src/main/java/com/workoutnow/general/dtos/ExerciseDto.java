@@ -24,6 +24,7 @@ public class ExerciseDto {
     private ExerciseType exerciseType;
     @NotNull
     private Long repetitions;
+    private Long time;
 
     public ExerciseDto(Exercise exercise) {
         this.id = exercise.getId();
@@ -31,5 +32,6 @@ public class ExerciseDto {
         this.exampleLink = exercise.getExampleLink();
         this.exerciseType = exercise.getExerciseType();
         this.repetitions = exercise.getRepetitions();
+        this.time = exercise.getTime();
     }
 }

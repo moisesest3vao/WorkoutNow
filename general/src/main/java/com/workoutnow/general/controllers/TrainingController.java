@@ -23,7 +23,7 @@ public class TrainingController {
     @PostMapping
     public ResponseEntity<TrainingDto> create(@RequestBody @Valid TrainingForm form){
         TrainingDto trainingDto = this.trainingService.create(form);
-        return trainingDto != null? ResponseEntity.ok(trainingDto) : ResponseEntity.badRequest().build();
+        return trainingDto != null ? ResponseEntity.ok(trainingDto) : ResponseEntity.badRequest().build();
     }
 
     @GetMapping

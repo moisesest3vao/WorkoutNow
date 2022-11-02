@@ -27,8 +27,11 @@ public class TrainingService {
                 .stream().map(this::getTrainingById)
                 .collect(Collectors.toList());
 
-        Training training = new Training(form, exercises);
+        if(exercises.contains(null)){
+            return null;
+        }
 
+        Training training = new Training(form, exercises);
         Training entity = this.trainingRepository.save(training);
         return new TrainingDto(entity);
     }

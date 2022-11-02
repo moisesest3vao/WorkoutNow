@@ -19,6 +19,7 @@ public class Exercise {
     @Enumerated(EnumType.STRING)
     private ExerciseType exerciseType;
     private Long repetitions;
+    private Long time;
 
     public Exercise(ExerciseDto dto){
         this.id = dto.getId();
@@ -26,5 +27,6 @@ public class Exercise {
         this.exampleLink = dto.getExampleLink();
         this.exerciseType = dto.getExerciseType();
         this.repetitions = dto.getRepetitions();
+        this.time = dto.getTime();
     }
 }
