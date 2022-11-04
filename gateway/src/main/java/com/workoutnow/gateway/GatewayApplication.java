@@ -19,15 +19,13 @@ public class GatewayApplication {
 
 	@Bean
 	public RouteLocator routes(RouteLocatorBuilder builder){
-		return builder
-				.routes()
-					.route(r -> r
-							.path(
-									"/exercise/**",
-									"/training/**",
-									"/execution/**"
-							)
-							.uri("lb://MSGENERAL/**"))
+		return builder.routes()
+			.route(r -> r
+				.path(
+					"/exercise/**",
+					"/training/**",
+					"/execution/**"
+				).uri("lb://MSGENERAL/**"))
 				.build();
 	}
 }
