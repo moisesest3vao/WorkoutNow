@@ -44,4 +44,12 @@ public class TrainingService {
         Page<Training> entityPage = this.trainingRepository.findAll(pageable);
         return entityPage.map(TrainingDto::new);
     }
+
+    public Integer deleteById(Long id) {
+        if(this.trainingRepository.existsById(id)){
+            this.trainingRepository.deleteById(id);
+            return 0;
+        }
+        return 1;
+    }
 }

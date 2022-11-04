@@ -19,16 +19,23 @@ public class ExerciseController {
     private ExerciseService exerciseService;
 
     @PostMapping
+    @RolesAllowed({"training_management"})
     public ResponseEntity<ExerciseDto> create(@RequestBody @Valid ExerciseDto exercise){
         ExerciseDto exerciseDto = this.exerciseService.create(exercise);
         return exerciseDto != null ? ResponseEntity.ok(exerciseDto) : ResponseEntity.badRequest().build();
     }
 
     @GetMapping
-    @RolesAllowed({"admin"})
     public ResponseEntity<Page<ExerciseDto>> getAll(@RequestParam Integer size, @RequestParam Integer page){
         Pageable pageable = (Pageable) PageRequest.of(page, size);
         Page<ExerciseDto> exercisesDto = this.exerciseService.getAll(pageable);
         return exercisesDto != null ? ResponseEntity.ok(exercisesDto) : ResponseEntity.badRequest().build();
+    }
+
+    @DeleteMapping("{id}")
+    @RolesAllowed({"training_management"})
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        Integer response = this.exerciseService.deleteById(id);
+        return response != null ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 }

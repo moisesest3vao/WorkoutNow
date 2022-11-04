@@ -16,6 +16,7 @@ public class ExecutionDto {
     private StatusExecution status;
     private Date start;
     private Date end;
+    private String userId;
 
     public ExecutionDto(Execution execution) {
         this.id = execution.getId();
@@ -23,5 +24,6 @@ public class ExecutionDto {
         this.status = execution.getStatus();
         this.start = execution.getStartDate();
         this.end = execution.getEndDate();
+        this.userId = execution.getUserId();
     }
 }

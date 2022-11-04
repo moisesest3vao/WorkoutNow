@@ -27,4 +27,11 @@ public class ExerciseService {
     }
 
 
+    public Integer deleteById(Long id) {
+        if(this.exerciseRepository.existsById(id)){
+            this.exerciseRepository.deleteById(id);
+            return 0;
+        }
+        return 1;
+    }
 }

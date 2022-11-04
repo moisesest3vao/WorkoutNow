@@ -4,6 +4,7 @@ import com.workoutnow.general.dtos.ExecutionForm;
 import com.workoutnow.general.enums.StatusExecution;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.keycloak.representations.idm.UserRepresentation;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,11 +23,13 @@ public class Execution {
     private Date startDate;
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
+    private String userId;
 
-    public Execution(ExecutionForm form, Training training) {
+    public Execution(ExecutionForm form, Training training, String userId) {
         this.id = form.getId();
         this.training = training;
         this.status = StatusExecution.IN_PROGRESS;
         this.startDate = new Date();
+        this.userId = userId;
     }
 }
