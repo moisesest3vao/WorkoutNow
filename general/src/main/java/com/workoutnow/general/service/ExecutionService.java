@@ -7,7 +7,6 @@ import com.workoutnow.general.models.Execution;
 import com.workoutnow.general.models.Training;
 import com.workoutnow.general.repositories.ExecutionRepository;
 import com.workoutnow.general.repositories.TrainingRepository;
-//import com.workoutnow.general.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
