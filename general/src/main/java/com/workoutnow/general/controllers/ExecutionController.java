@@ -1,7 +1,8 @@
 package com.workoutnow.general.controllers;
 
 import com.workoutnow.general.dtos.ExecutionDto;
-import com.workoutnow.general.dtos.ExecutionForm;
+import com.workoutnow.general.dtos.ExperimentalExecutionForm;
+import com.workoutnow.general.dtos.TrainingDto;
 import com.workoutnow.general.enums.StatusExecution;
 import com.workoutnow.general.service.ExecutionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,9 @@ public class ExecutionController {
     @Autowired
     private ExecutionService executionService;
 
-    @PostMapping
-    public ResponseEntity<ExecutionDto> create(@RequestBody @Valid ExecutionForm form){
-        ExecutionDto executionDto = this.executionService.create(form);
+    @PostMapping("/{id}")
+    public ResponseEntity<ExecutionDto> create(@PathVariable("id") Long trainingId ){
+        ExecutionDto executionDto = this.executionService.create(trainingId);
         return executionDto != null ? ResponseEntity.ok(executionDto) : ResponseEntity.badRequest().build();
     }
 
@@ -32,7 +33,7 @@ public class ExecutionController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<Page<ExecutionDto>> getAllUserExecution(@RequestParam Integer page, @RequestParam Integer size){
+    public ResponseEntity<Page<ExecutionDto>> getAllExecutionByUser(@RequestParam Integer page, @RequestParam Integer size){
         Pageable pageable = PageRequest.of(page, size);
         Page<ExecutionDto> result = this.executionService.findAllUserExecution(pageable);
         return ResponseEntity.ok(result);

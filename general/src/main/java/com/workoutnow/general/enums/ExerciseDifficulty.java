@@ -1,5 +1,5 @@
 package com.workoutnow.general.enums;
 
 public enum ExerciseDifficulty {
-    BEGINNER, INTERMEDIATE, ADVANCED
+    BEGINNER, INTERMEDIATE, ADVANCED, EXPERIMENTAL
 }

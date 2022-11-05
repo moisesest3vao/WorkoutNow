@@ -1,5 +1,6 @@
 package com.workoutnow.general.service;
 
+import com.workoutnow.general.dtos.ExperimentalExecutionForm;
 import com.workoutnow.general.dtos.TrainingDto;
 import com.workoutnow.general.dtos.TrainingForm;
 import com.workoutnow.general.models.Exercise;
@@ -51,5 +52,13 @@ public class TrainingService {
             return 0;
         }
         return 1;
+    }
+
+    public TrainingDto createExperimentalTraining(ExperimentalExecutionForm form) {
+        //send form data to analytics microservice
+
+        List<Training> allExperimentalTrainings = this.trainingRepository.findAllExperimentalTrainings();
+        Training training = allExperimentalTrainings.get(0);
+        return training == null ? null : new TrainingDto(training);
     }
 }

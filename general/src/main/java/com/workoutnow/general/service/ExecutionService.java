@@ -1,7 +1,7 @@
 package com.workoutnow.general.service;
 
 import com.workoutnow.general.dtos.ExecutionDto;
-import com.workoutnow.general.dtos.ExecutionForm;
+import com.workoutnow.general.dtos.ExperimentalExecutionForm;
 import com.workoutnow.general.enums.StatusExecution;
 import com.workoutnow.general.models.Execution;
 import com.workoutnow.general.models.Training;
@@ -25,15 +25,15 @@ public class ExecutionService {
     @Autowired
     private KeycloakService keycloakService;
 
-    public ExecutionDto create(ExecutionForm form){
+    public ExecutionDto create(Long trainingId){
         Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         String userId = jwt.getClaims().get("sub").toString();
-        Training training = trainingRepository.findById(form.getTrainingId()).orElse(null);
+        Training training = trainingRepository.findById(trainingId).orElse(null);
         if(training == null){
             return null;
         }
-        Execution execution = new Execution(form, training, userId);
+        Execution execution = new Execution(training, userId);
         execution = this.executionRepository.save(execution);
 
         return new ExecutionDto(execution);

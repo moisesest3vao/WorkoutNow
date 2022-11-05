@@ -1,5 +1,6 @@
 package com.workoutnow.general.controllers;
 
+import com.workoutnow.general.dtos.ExperimentalExecutionForm;
 import com.workoutnow.general.dtos.TrainingDto;
 import com.workoutnow.general.dtos.TrainingForm;
 import com.workoutnow.general.service.TrainingService;
@@ -20,6 +21,12 @@ public class TrainingController {
     @Autowired
     private TrainingService trainingService;
 
+    @PostMapping("experimental")
+    public ResponseEntity<TrainingDto> createExperimentalTraining(@RequestBody @Valid ExperimentalExecutionForm form ){
+        TrainingDto experimentalTraining = this.trainingService.createExperimentalTraining(form);
+
+        return experimentalTraining!= null ? ResponseEntity.ok(experimentalTraining): ResponseEntity.notFound().build();
+    }
     @PostMapping
     @RolesAllowed({"training_management"})
     public ResponseEntity<TrainingDto> create(@RequestBody @Valid TrainingForm form){
