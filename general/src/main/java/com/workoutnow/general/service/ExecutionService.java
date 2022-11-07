@@ -1,7 +1,6 @@
 package com.workoutnow.general.service;
 
 import com.workoutnow.general.dtos.ExecutionDto;
-import com.workoutnow.general.dtos.ExperimentalExecutionForm;
 import com.workoutnow.general.enums.StatusExecution;
 import com.workoutnow.general.models.Execution;
 import com.workoutnow.general.models.Training;

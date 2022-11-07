@@ -3,6 +3,7 @@ package com.workoutnow.general.service;
 import com.workoutnow.general.dtos.ExperimentalExecutionForm;
 import com.workoutnow.general.dtos.TrainingDto;
 import com.workoutnow.general.dtos.TrainingForm;
+import com.workoutnow.general.enums.KafkaTopics;
 import com.workoutnow.general.models.Exercise;
 import com.workoutnow.general.models.Training;
 import com.workoutnow.general.repositories.ExerciseRepository;
@@ -10,9 +11,11 @@ import com.workoutnow.general.repositories.TrainingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,6 +24,8 @@ public class TrainingService {
     private TrainingRepository trainingRepository;
     @Autowired
     private ExerciseRepository exerciseRepository;
+    @Autowired
+    private KafkaTemplate<String, Object> kafkaTemplate;
 
     public TrainingDto create(TrainingForm form) {
         List<Long> exercisesId = form.getExercisesId();
@@ -56,9 +61,12 @@ public class TrainingService {
 
     public TrainingDto createExperimentalTraining(ExperimentalExecutionForm form) {
         //send form data to analytics microservice
+        this.kafkaTemplate.send(KafkaTopics.USER_HEALTH_DATA_TOPIC.topic, form);
 
         List<Training> allExperimentalTrainings = this.trainingRepository.findAllExperimentalTrainings();
-        Training training = allExperimentalTrainings.get(0);
+        int randomIndex = new Random().nextInt(allExperimentalTrainings.size());
+        Training training = allExperimentalTrainings.get(randomIndex);
+
         return training == null ? null : new TrainingDto(training);
     }
 }

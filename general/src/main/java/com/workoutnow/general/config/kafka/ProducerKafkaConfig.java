@@ -45,10 +45,10 @@ public class ProducerKafkaConfig<T> {
         return new KafkaTemplate<>(producerFactory());
     }
 
-    @Bean
-    public KafkaTemplate<String, String> kafkaTemplateForString(){
-        return new KafkaTemplate<String, String>(producerFactoryToString());
-    }
+//    @Bean
+//    public KafkaTemplate<String, String> kafkaTemplateForString(){
+//        return new KafkaTemplate<String, String>(producerFactoryToString());
+//    }
 
     @Bean
     public KafkaAdmin kafkaAdmin(){

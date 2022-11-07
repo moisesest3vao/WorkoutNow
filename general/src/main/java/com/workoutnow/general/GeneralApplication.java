@@ -38,7 +38,11 @@ public class GeneralApplication {
 		training.setName("NOME TESTE INTERMEDIATE");
 		training.setExercises(exercises);
 		training.setExerciseDifficulty(ExerciseDifficulty.INTERMEDIATE);
-		trainingRepository.save(training);
+
+		Training experimentalTraining = new Training();
+		experimentalTraining.setExercises(exercises);
+		experimentalTraining.setExerciseDifficulty(ExerciseDifficulty.EXPERIMENTAL);
+		trainingRepository.save(experimentalTraining);
 	}
 
 

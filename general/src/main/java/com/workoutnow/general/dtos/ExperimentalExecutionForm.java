@@ -1,16 +1,17 @@
 package com.workoutnow.general.dtos;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Range;
+
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Data
 public class ExperimentalExecutionForm {
     @NotNull
-    @Size(max = 500, min = 1)
+    @Range(max = 500, min = 10)
     private Long weight;
     @NotNull
-    @Size(max = 300, min = 50)
+    @Range(max = 300, min = 50)
     private Long height;
     @NotNull
     private boolean hasSportHistory;
