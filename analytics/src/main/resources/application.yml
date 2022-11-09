@@ -8,6 +8,11 @@ app:
       password: admin
       username: admin
 spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: workoutnowanalytics
   kafka:
     bootstrap-servers: localhost:9092
   application:

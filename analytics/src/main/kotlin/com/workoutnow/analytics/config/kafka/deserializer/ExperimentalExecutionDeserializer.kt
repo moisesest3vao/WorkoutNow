@@ -1,7 +1,7 @@
 package com.workoutnow.analytics.config.kafka.deserializer
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.workoutnow.analytics.model.ExperimentalExecutionForm
+import com.workoutnow.analytics.dto.ExperimentalExecutionForm
 import org.apache.kafka.common.errors.SerializationException
 import org.apache.kafka.common.serialization.Deserializer
 import org.slf4j.LoggerFactory
