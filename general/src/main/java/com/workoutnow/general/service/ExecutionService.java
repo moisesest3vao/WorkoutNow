@@ -6,6 +6,7 @@ import com.workoutnow.general.models.Execution;
 import com.workoutnow.general.models.Training;
 import com.workoutnow.general.repositories.ExecutionRepository;
 import com.workoutnow.general.repositories.TrainingRepository;
+import com.workoutnow.general.service.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -53,8 +54,7 @@ public class ExecutionService {
     }
 
     public Page<ExecutionDto> findAllUserExecution(Pageable pageable) {
-        Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String id = jwt.getClaims().get("sub").toString();
+        String id = UserUtil.getCurrentUserId();
 
         Page<Execution> queryResult = this.executionRepository.findAllByUserId(id, pageable);
         return queryResult.map(ExecutionDto::new);

@@ -8,6 +8,7 @@ import com.workoutnow.general.models.Exercise;
 import com.workoutnow.general.models.Training;
 import com.workoutnow.general.repositories.ExerciseRepository;
 import com.workoutnow.general.repositories.TrainingRepository;
+import com.workoutnow.general.service.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -60,8 +61,9 @@ public class TrainingService {
     }
 
     public TrainingDto createExperimentalTraining(ExperimentalExecutionForm form) {
+        String userId=UserUtil.getCurrentUserId();
         //send form data to analytics microservice
-        this.kafkaTemplate.send(KafkaTopics.USER_HEALTH_DATA_TOPIC.topic, form);
+        this.kafkaTemplate.send(KafkaTopics.USER_HEALTH_DATA_TOPIC.topic, userId, form);
 
         List<Training> allExperimentalTrainings = this.trainingRepository.findAllExperimentalTrainings();
         int randomIndex = new Random().nextInt(allExperimentalTrainings.size());
