@@ -2,6 +2,7 @@ package com.workoutnow.general.service;
 
 import com.workoutnow.general.dtos.ExperimentalExecutionForm;
 import com.workoutnow.general.dtos.TrainingDto;
+import com.workoutnow.general.dtos.TrainingFeedbackForm;
 import com.workoutnow.general.dtos.TrainingForm;
 import com.workoutnow.general.enums.KafkaTopics;
 import com.workoutnow.general.models.Exercise;
@@ -13,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
+import org.springframework.util.concurrent.ListenableFuture;
 
 import java.util.List;
 import java.util.Random;
@@ -70,5 +73,12 @@ public class TrainingService {
         Training training = allExperimentalTrainings.get(randomIndex);
 
         return training == null ? null : new TrainingDto(training);
+    }
+
+    public Integer doFeedbackTreatment(TrainingFeedbackForm form) {
+        String currentUserId = UserUtil.getCurrentUserId();
+        ListenableFuture<SendResult<String, Object>> listenable =
+                this.kafkaTemplate.send(KafkaTopics.TRAINING_FEEDBACK_TOPIC.topic, currentUserId, form);
+        return 0;
     }
 }

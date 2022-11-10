@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/analytics/analytics.iml" filepath="$PROJECT_DIR$/analytics/analytics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/general/general.iml" filepath="$PROJECT_DIR$/general/general.iml" />
+      <module fileurl="file://$PROJECT_DIR$/servicediscovery/servicediscovery.iml" filepath="$PROJECT_DIR$/servicediscovery/servicediscovery.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/workoutnow.iml" filepath="$PROJECT_DIR$/.idea/workoutnow.iml" />
     </modules>
   </component>

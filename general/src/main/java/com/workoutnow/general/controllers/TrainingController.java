@@ -2,6 +2,7 @@ package com.workoutnow.general.controllers;
 
 import com.workoutnow.general.dtos.ExperimentalExecutionForm;
 import com.workoutnow.general.dtos.TrainingDto;
+import com.workoutnow.general.dtos.TrainingFeedbackForm;
 import com.workoutnow.general.dtos.TrainingForm;
 import com.workoutnow.general.service.TrainingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,4 +48,11 @@ public class TrainingController {
         Integer response = this.trainingService.deleteById(id);
         return response != null ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
+
+    @PostMapping("feedback")
+    public ResponseEntity<TrainingDto> getTrainingFeedback(@RequestBody @Valid TrainingFeedbackForm form){
+        Integer response = this.trainingService.doFeedbackTreatment(form);
+        return response == 0 ? ResponseEntity.ok().build(): ResponseEntity.badRequest().build();
+    }
+
 }
