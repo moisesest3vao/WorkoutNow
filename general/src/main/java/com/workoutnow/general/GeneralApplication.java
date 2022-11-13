@@ -4,8 +4,10 @@ import com.workoutnow.general.enums.ExerciseDifficulty;
 import com.workoutnow.general.enums.ExerciseType;
 import com.workoutnow.general.models.Exercise;
 import com.workoutnow.general.models.Training;
+import com.workoutnow.general.repositories.ExecutionRepository;
 import com.workoutnow.general.repositories.ExerciseRepository;
 import com.workoutnow.general.repositories.TrainingRepository;
+import com.workoutnow.general.service.util.MockUtil;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,43 +28,13 @@ public class GeneralApplication {
 
 	@Bean
 	CommandLineRunner init(TrainingRepository trainingRepository,
-						   ExerciseRepository exerciseRepository) {
+						   ExerciseRepository exerciseRepository,
+						   ExecutionRepository executionRepository) {
+		String userId = "c159b52a-3569-4adf-8543-35bc0e40a478";
 		return args -> {
-			preloadData(trainingRepository, exerciseRepository);
+			MockUtil.preloadData(trainingRepository, exerciseRepository, executionRepository, userId);
 		};
 	}
 
-	void preloadData(TrainingRepository trainingRepository, ExerciseRepository exerciseRepository) {
-		List<Exercise> exercises = exerciseRepository.saveAll(getMockExercises());
-		Training training = new Training();
-		training.setName("NOME TESTE INTERMEDIATE");
-		training.setExercises(exercises);
-		training.setExerciseDifficulty(ExerciseDifficulty.INTERMEDIATE);
 
-		Training experimentalTraining = new Training();
-		experimentalTraining.setExercises(exercises);
-		experimentalTraining.setExerciseDifficulty(ExerciseDifficulty.EXPERIMENTAL);
-		trainingRepository.save(experimentalTraining);
-	}
-
-
-	List<Exercise> getMockExercises(){
-		List<Exercise> exercises = new ArrayList<>();
-		Exercise exercise = new Exercise();
-		exercise.setExerciseType(ExerciseType.ARM);
-		exercise.setRepetitions(10L);
-		exercise.setName("Flexão de Braço");
-		exercise.setExampleLink("youtube.com/watchasidajsdajdklsad");
-
-		Exercise exercise2 = new Exercise();
-		exercise2.setExerciseType(ExerciseType.ABS);
-		exercise2.setTime(30L);
-		exercise2.setName("Prancha");
-		exercise2.setExampleLink("youtube.com/watchasidajsdajdklsad");
-
-		exercises.add(exercise2);
-		exercises.add(exercise);
-
-		return exercises;
-	}
 }

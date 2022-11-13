@@ -2,7 +2,6 @@ package com.workoutnow.general.dtos;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
-
 import javax.validation.constraints.NotNull;
 
 @Data
