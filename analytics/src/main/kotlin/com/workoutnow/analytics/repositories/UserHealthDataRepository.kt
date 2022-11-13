@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface UserHealthDataRepository : MongoRepository<UserHealthData, String> {
+    fun findAllByUserId(userId: String) :List<UserHealthData>
 }

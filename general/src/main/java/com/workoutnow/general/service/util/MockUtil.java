@@ -57,7 +57,7 @@ public class MockUtil {
         Execution execution10 = new Execution(trainings.get(0), userId);
         execution10.setEndDate(new Date());
         execution10.setStatus(StatusExecution.FINISHED);
-        
+
         Execution execution11 = new Execution(trainings.get(0), userId);
         execution11.setEndDate(new Date());
         execution11.setStatus(StatusExecution.FINISHED);

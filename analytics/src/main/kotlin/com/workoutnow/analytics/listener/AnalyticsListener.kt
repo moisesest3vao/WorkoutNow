@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component
 import javax.validation.Valid
 
 @Component
-class ExecutionListener @Autowired constructor(
+class AnalyticsListener @Autowired constructor(
     private val analyticsService: AnalyticsService
 ) {
     private val logger = LoggerFactory.getLogger(javaClass)

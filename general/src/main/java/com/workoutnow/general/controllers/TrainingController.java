@@ -28,13 +28,14 @@ public class TrainingController {
 
         return experimentalTraining!= null ? ResponseEntity.ok(experimentalTraining): ResponseEntity.notFound().build();
     }
+            return userAnalyticsDto != null ? ResponseEntity.ok(userAnalyticsDto) : ResponseEntity.badR();
+
     @PostMapping
     @RolesAllowed({"training_management"})
     public ResponseEntity<TrainingDto> create(@RequestBody @Valid TrainingForm form){
         TrainingDto trainingDto = this.trainingService.create(form);
         return trainingDto != null ? ResponseEntity.ok(trainingDto) : ResponseEntity.badRequest().build();
     }
-
     @GetMapping
     public ResponseEntity<Page<TrainingDto>> getAll(@RequestParam Integer size, @RequestParam Integer page){
         Pageable pageable = (Pageable) PageRequest.of(page, size);
@@ -52,7 +53,7 @@ public class TrainingController {
     @PostMapping("feedback")
     public ResponseEntity<TrainingDto> getTrainingFeedback(@RequestBody @Valid TrainingFeedbackForm form){
         Integer response = this.trainingService.doFeedbackTreatment(form);
-        return response == 0 ? ResponseEntity.ok().build(): ResponseEntity.badRequest().build();
+        return response == 0 ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
 }

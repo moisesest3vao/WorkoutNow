@@ -76,9 +76,12 @@ public class TrainingService {
     }
 
     public Integer doFeedbackTreatment(TrainingFeedbackForm form) {
-        String currentUserId = UserUtil.getCurrentUserId();
-        ListenableFuture<SendResult<String, Object>> listenable =
-                this.kafkaTemplate.send(KafkaTopics.TRAINING_FEEDBACK_TOPIC.topic, currentUserId, form);
-        return 0;
+        if(this.trainingRepository.existsById(form.getTrainingId())){
+            String currentUserId = UserUtil.getCurrentUserId();
+            ListenableFuture<SendResult<String, Object>> listenable =
+                    this.kafkaTemplate.send(KafkaTopics.TRAINING_FEEDBACK_TOPIC.topic, currentUserId, form);
+            return 0;
+        }
+        return 1;
     }
 }
