@@ -7,7 +7,6 @@ object UserUtil {
     val currentUserId: String
         get() {
             val jwt = SecurityContextHolder.getContext().authentication.principal as Jwt
-            println(jwt.claims["sub"].toString())
             return jwt.claims["sub"].toString()
         }
 }

@@ -32,10 +32,14 @@ public class GeneralApplication {
 						   ExerciseRepository exerciseRepository,
 						   ExecutionRepository executionRepository,
 						   KafkaTemplate<String, Object> kafkaTemplate) {
+		Boolean wantsToPopulateEnvironmentWithMockData = false;
 		String userId = "c159b52a-3569-4adf-8543-35bc0e40a478";
-		return args -> {
-			MockUtil.preloadData(trainingRepository, exerciseRepository, executionRepository,kafkaTemplate, userId);
-		};
+
+		if(wantsToPopulateEnvironmentWithMockData){
+			return args -> {
+				MockUtil.preloadData(trainingRepository, exerciseRepository, executionRepository,kafkaTemplate, userId);
+			};
+		}
 	}
 
 
