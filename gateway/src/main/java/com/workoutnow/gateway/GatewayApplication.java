@@ -20,12 +20,14 @@ public class GatewayApplication {
 	@Bean
 	public RouteLocator routes(RouteLocatorBuilder builder){
 		return builder.routes()
-			.route(r -> r
-				.path(
-					"/exercise/**",
-					"/training/**",
-					"/execution/**"
-				).uri("lb://MSGENERAL/**"))
+				.route(r -> r
+					.path("/analytics/**")
+					.uri("lb://MSANALYTICS/**"))
+				.route(r -> r
+					.path("/exercise/**",
+						"/training/**",
+						"/execution/**"
+					).uri("lb://MSGENERAL/**"))
 				.build();
 	}
 }

@@ -1,7 +1,10 @@
 package com.workoutnow.general.service.util;
 
+import com.workoutnow.general.dtos.ExperimentalExecutionForm;
+import com.workoutnow.general.dtos.TrainingFeedbackForm;
 import com.workoutnow.general.enums.ExerciseDifficulty;
 import com.workoutnow.general.enums.ExerciseType;
+import com.workoutnow.general.enums.KafkaTopics;
 import com.workoutnow.general.enums.StatusExecution;
 import com.workoutnow.general.models.Execution;
 import com.workoutnow.general.models.Exercise;
@@ -9,6 +12,7 @@ import com.workoutnow.general.models.Training;
 import com.workoutnow.general.repositories.ExecutionRepository;
 import com.workoutnow.general.repositories.ExerciseRepository;
 import com.workoutnow.general.repositories.TrainingRepository;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,10 +24,71 @@ public class MockUtil {
     public static void preloadData(TrainingRepository trainingRepository,
                                    ExerciseRepository exerciseRepository,
                                    ExecutionRepository executionRepository,
+                                   KafkaTemplate<String, Object> kafkaTemplate,
                                    String userId) {
         List<Exercise> exercises = exerciseRepository.saveAll(getMockExercises());
         List<Training> trainings = trainingRepository.saveAll(getMockTrainings(exercises));
         executionRepository.saveAll(getMockExecutions(trainings, userId));
+        List<ExperimentalExecutionForm> listForm = getMockExperimentalForm();
+        listForm.forEach(form -> {
+            kafkaTemplate.send(KafkaTopics.USER_HEALTH_DATA_TOPIC.topic, userId, form);
+        });
+        List<TrainingFeedbackForm> listFeedbackForm = getMockFeedbackForm();
+        listFeedbackForm.forEach(form -> {
+            kafkaTemplate.send(KafkaTopics.TRAINING_FEEDBACK_TOPIC.topic, userId, form);
+        });
+    }
+
+    private static List<TrainingFeedbackForm> getMockFeedbackForm() {
+        List<TrainingFeedbackForm> feedbacks = new ArrayList<>();
+        feedbacks.add(new TrainingFeedbackForm(
+                1L,
+                true,
+                7
+        ));
+
+        feedbacks.add(new TrainingFeedbackForm(
+                2L,
+                false,
+                4
+        ));
+
+        feedbacks.add(new TrainingFeedbackForm(
+                3L,
+                true,
+                10
+        ));
+
+        feedbacks.add(new TrainingFeedbackForm(
+                1L,
+                false,
+                6
+        ));
+
+        return feedbacks;
+    }
+
+    private static List<ExperimentalExecutionForm> getMockExperimentalForm() {
+        List<ExperimentalExecutionForm> experimentals = new ArrayList<>();
+        experimentals.add(new ExperimentalExecutionForm(
+                50L,
+                150L,
+                false
+        ));
+
+        experimentals.add(new ExperimentalExecutionForm(
+                55L,
+                151L,
+                true
+        ));
+
+        experimentals.add(new ExperimentalExecutionForm(
+                52L,
+                152L,
+                true
+        ));
+
+        return experimentals;
     }
 
     private static List<Execution> getMockExecutions(List<Training> trainings, String userId) {

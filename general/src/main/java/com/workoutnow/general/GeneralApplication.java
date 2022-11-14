@@ -13,6 +13,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.kafka.core.KafkaTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +30,11 @@ public class GeneralApplication {
 	@Bean
 	CommandLineRunner init(TrainingRepository trainingRepository,
 						   ExerciseRepository exerciseRepository,
-						   ExecutionRepository executionRepository) {
+						   ExecutionRepository executionRepository,
+						   KafkaTemplate<String, Object> kafkaTemplate) {
 		String userId = "c159b52a-3569-4adf-8543-35bc0e40a478";
 		return args -> {
-			MockUtil.preloadData(trainingRepository, exerciseRepository, executionRepository, userId);
+			MockUtil.preloadData(trainingRepository, exerciseRepository, executionRepository,kafkaTemplate, userId);
 		};
 	}
 

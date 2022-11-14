@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull
 data class TrainingFeedbackForm (
     @NotNull
     @JsonProperty("trainingId")
-    val trainingId: String,
+    val trainingId: Long,
     @NotNull
     @JsonProperty("difficultyScale")
     val difficultyScale: Int,

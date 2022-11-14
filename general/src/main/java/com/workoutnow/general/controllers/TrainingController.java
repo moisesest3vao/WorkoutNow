@@ -23,12 +23,11 @@ public class TrainingController {
     private TrainingService trainingService;
 
     @PostMapping("experimental")
-    public ResponseEntity<TrainingDto> createExperimentalTraining(@RequestBody @Valid ExperimentalExecutionForm form ){
+    public ResponseEntity<TrainingDto> createExperimentalTraining(@RequestBody @Valid ExperimentalExecutionForm form ) {
         TrainingDto experimentalTraining = this.trainingService.createExperimentalTraining(form);
 
-        return experimentalTraining!= null ? ResponseEntity.ok(experimentalTraining): ResponseEntity.notFound().build();
+        return experimentalTraining != null ? ResponseEntity.ok(experimentalTraining) : ResponseEntity.notFound().build();
     }
-            return userAnalyticsDto != null ? ResponseEntity.ok(userAnalyticsDto) : ResponseEntity.badR();
 
     @PostMapping
     @RolesAllowed({"training_management"})

@@ -10,7 +10,7 @@ import java.util.*
 class TrainingFeedbackData(
     @Id
     val id: ObjectId = ObjectId.get(),
-    val trainingId: String,
+    val trainingId: Long,
     val difficultyScale: Int,
     val wouldLikeToDoAgain: Boolean,
     val userId: String,

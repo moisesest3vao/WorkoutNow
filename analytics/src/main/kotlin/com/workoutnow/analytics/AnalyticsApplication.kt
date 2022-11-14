@@ -7,7 +7,9 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient
 @SpringBootApplication
 @EnableEurekaClient
 class AnalyticsApplication
+	fun main(args: Array<String>) {
+		runApplication<AnalyticsApplication>(*args)
+	}
 
-fun main(args: Array<String>) {
-	runApplication<AnalyticsApplication>(*args)
-}
+
+
