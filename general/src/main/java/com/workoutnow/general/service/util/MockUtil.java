@@ -39,7 +39,7 @@ public class MockUtil {
         });
     }
 
-    private static List<TrainingFeedbackForm> getMockFeedbackForm() {
+    public static List<TrainingFeedbackForm> getMockFeedbackForm() {
         List<TrainingFeedbackForm> feedbacks = new ArrayList<>();
         feedbacks.add(new TrainingFeedbackForm(
                 1L,
@@ -68,7 +68,7 @@ public class MockUtil {
         return feedbacks;
     }
 
-    private static List<ExperimentalExecutionForm> getMockExperimentalForm() {
+    public static List<ExperimentalExecutionForm> getMockExperimentalForm() {
         List<ExperimentalExecutionForm> experimentals = new ArrayList<>();
         experimentals.add(new ExperimentalExecutionForm(
                 50L,
@@ -91,7 +91,7 @@ public class MockUtil {
         return experimentals;
     }
 
-    private static List<Execution> getMockExecutions(List<Training> trainings, String userId) {
+    public static List<Execution> getMockExecutions(List<Training> trainings, String userId) {
         List<Execution> executions = new ArrayList<>();
 
         Execution execution = new Execution(trainings.get(0), userId);
@@ -148,7 +148,7 @@ public class MockUtil {
         return executions;
     }
 
-    private static List<Training> getMockTrainings(List<Exercise> exercises) {
+    public static List<Training> getMockTrainings(List<Exercise> exercises) {
         List<Training> trainings = new ArrayList<>();
 
         Training training = new Training();
@@ -180,7 +180,7 @@ public class MockUtil {
     }
 
 
-    private static List<Exercise> getMockExercises(){
+    public static List<Exercise> getMockExercises(){
         List<Exercise> exercises = new ArrayList<>();
 
         Exercise exercise = new Exercise();

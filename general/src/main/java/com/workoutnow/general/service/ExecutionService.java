@@ -18,17 +18,20 @@ import java.util.Date;
 
 @Service
 public class ExecutionService {
+    private final ExecutionRepository executionRepository;
+    private final TrainingRepository trainingRepository;
+    private final KeycloakService keycloakService;
+
     @Autowired
-    private ExecutionRepository executionRepository;
-    @Autowired
-    private TrainingRepository trainingRepository;
-    @Autowired
-    private KeycloakService keycloakService;
+    public ExecutionService(ExecutionRepository executionRepository, TrainingRepository trainingRepository, KeycloakService keycloakService) {
+        this.executionRepository = executionRepository;
+        this.trainingRepository = trainingRepository;
+        this.keycloakService = keycloakService;
+    }
 
     public ExecutionDto create(Long trainingId){
-        Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userId = UserUtil.getCurrentUserId();
 
-        String userId = jwt.getClaims().get("sub").toString();
         Training training = trainingRepository.findById(trainingId).orElse(null);
         if(training == null){
             return null;

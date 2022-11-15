@@ -1,6 +1,7 @@
 package com.workoutnow.general.models;
 
 import com.workoutnow.general.enums.StatusExecution;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.util.Date;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Execution {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

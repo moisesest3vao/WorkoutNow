@@ -5,6 +5,7 @@ import com.workoutnow.general.dtos.ExperimentalExecutionForm;
 import com.workoutnow.general.dtos.TrainingDto;
 import com.workoutnow.general.enums.StatusExecution;
 import com.workoutnow.general.service.ExecutionService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("execution")
+@AllArgsConstructor
 public class ExecutionController {
     @Autowired
     private ExecutionService executionService;
