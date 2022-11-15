@@ -30,7 +30,7 @@ public class TrainingController {
     }
 
     @PostMapping
-    @RolesAllowed({"training_management"})
+    @RolesAllowed({"training_management", "admin"})
     public ResponseEntity<TrainingDto> create(@RequestBody @Valid TrainingForm form){
         TrainingDto trainingDto = this.trainingService.create(form);
         return trainingDto != null ? ResponseEntity.ok(trainingDto) : ResponseEntity.badRequest().build();
@@ -43,7 +43,7 @@ public class TrainingController {
     }
 
     @DeleteMapping("{id}")
-    @RolesAllowed({"training_management"})
+    @RolesAllowed({"training_management", "admin"})
     public ResponseEntity<?> delete(@PathVariable Long id){
         Integer response = this.trainingService.deleteById(id);
         return response != null ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();

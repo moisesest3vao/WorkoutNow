@@ -40,6 +40,7 @@ public class GeneralApplication {
 				MockUtil.preloadData(trainingRepository, exerciseRepository, executionRepository,kafkaTemplate, userId);
 			};
 		}
+		return null;
 	}
 
 

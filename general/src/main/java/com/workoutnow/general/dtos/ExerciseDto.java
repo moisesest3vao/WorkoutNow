@@ -22,7 +22,6 @@ public class ExerciseDto {
     private String exampleLink;
     @NotNull
     private ExerciseType exerciseType;
-    @NotNull
     private Long repetitions;
     private Long time;
 
