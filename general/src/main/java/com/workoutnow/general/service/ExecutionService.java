@@ -51,7 +51,7 @@ public class ExecutionService {
         if(status == StatusExecution.FINISHED){
             execution.setEndDate(new Date());
         }
-        execution = this.executionRepository.save(execution);
+        this.executionRepository.save(execution);
 
         return new ExecutionDto(execution);
     }

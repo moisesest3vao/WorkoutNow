@@ -65,6 +65,29 @@ public class ExecutionServiceTest {
         }
     }
 
+    @Test
+    void deveriaFinalizarOTreinamento(){
+        Date date = new Date();
+        Execution e = new Execution(
+                1L,
+                new Training(),
+                StatusExecution.IN_PROGRESS,
+                date,
+                null,
+                "idteste"
+        );
+        Mockito.when(this.executionRepository.findById(1L)).thenReturn(Optional.of(e));
+
+        ExecutionDto executionDto = executionService.patch(1L, StatusExecution.FINISHED);
+
+        assertEquals(e.getStatus(),  StatusExecution.FINISHED);
+        assertEquals(e.getStartDate(),  executionDto.getStart());
+        assertNotNull(executionDto.getEnd());
+        assertEquals(e.getUserId(), executionDto.getUserId());
+
+        Mockito.verify(executionRepository).save(Mockito.any());
+    }
+
 //    @Test
 //    void deveriaEnviarEmailParaVencedorDoLeilao(){
 //        List<Leilao> leiloes = leiloes();

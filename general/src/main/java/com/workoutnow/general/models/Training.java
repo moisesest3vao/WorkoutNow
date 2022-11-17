@@ -2,6 +2,7 @@ package com.workoutnow.general.models;
 
 import com.workoutnow.general.dtos.TrainingForm;
 import com.workoutnow.general.enums.ExerciseDifficulty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Training {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

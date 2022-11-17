@@ -24,12 +24,16 @@ import java.util.stream.Collectors;
 
 @Service
 public class TrainingService {
+    private final TrainingRepository trainingRepository;
+    private final ExerciseRepository exerciseRepository;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
+
     @Autowired
-    private TrainingRepository trainingRepository;
-    @Autowired
-    private ExerciseRepository exerciseRepository;
-    @Autowired
-    private KafkaTemplate<String, Object> kafkaTemplate;
+    public TrainingService(TrainingRepository trainingRepository, ExerciseRepository exerciseRepository, KafkaTemplate<String, Object> kafkaTemplate) {
+        this.trainingRepository = trainingRepository;
+        this.exerciseRepository = exerciseRepository;
+        this.kafkaTemplate = kafkaTemplate;
+    }
 
     public TrainingDto create(TrainingForm form) {
         List<Long> exercisesId = form.getExercisesId();
