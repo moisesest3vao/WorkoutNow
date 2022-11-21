@@ -31,6 +31,7 @@ class AnalyticsService @Autowired constructor(
 
     fun getCurrentUserAnalytics(): UserAnalyticsDto {
         val userId: String = UserUtil.currentUserId;
+        log.warn("getting analytics of user with id: $userId")
         val userHealthList: List<UserHealthData> = this.userHealthDataRepository.findAllByUserId(userId);
         val trainingFeedbackDataList: List<TrainingFeedbackData> = this.trainingFeedbackDataRepository.findByUserId(userId)
         log.warn(userHealthList.toString())

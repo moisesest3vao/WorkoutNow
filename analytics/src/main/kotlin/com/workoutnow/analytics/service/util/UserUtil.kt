@@ -4,9 +4,14 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.oauth2.jwt.Jwt
 
 object UserUtil {
-    val currentUserId: String
+
+    var currentUserId: String = ""
         get() {
-            val jwt = SecurityContextHolder.getContext().authentication.principal as Jwt
-            return jwt.claims["sub"].toString()
+            if(field == ""){
+                val jwt = SecurityContextHolder.getContext().authentication.principal as Jwt
+                return jwt.claims["sub"].toString()
+            }
+            return field
         }
+
 }
